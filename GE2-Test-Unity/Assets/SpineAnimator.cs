@@ -11,6 +11,8 @@ public class SpineAnimator : MonoBehaviour {
     public float bondDamping = 25;
     public float angularBondDamping = 25;
 
+    public float frequency, baseSize, startAngle, multi;
+
     private List<Vector3> offsets = new List<Vector3>();
     
     // Use this for initialization
@@ -22,12 +24,14 @@ public class SpineAnimator : MonoBehaviour {
             {
                 bones[i] = baseTail;
 
-                bones[i] = Instantiate(bones[i]);
+                //baseSize = bones[i].gameObject;
 
                 GameObject prevBone = (i == 0)
                     ? this.gameObject
                     : bones[i - 1];
                 GameObject bone = bones[i];
+
+                bones[i] = Instantiate(bones[i]);
 
                 Vector3 offset = bone.transform.position
                     - prevBone.transform.position;
