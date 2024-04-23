@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Purchasing;
 using UnityEngine;
 
 public class SpineAnimator : MonoBehaviour {
     public GameObject[] bones;
-    public GameObject[] tail;
     public GameObject baseTail;
 
     public float bondDamping = 25;
@@ -16,20 +16,18 @@ public class SpineAnimator : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        for (int i = 0; i < tail.Length; i++)
-        {
-            tail[i] = baseTail;
-            Instantiate(tail[i]);
-        }
-
         if (bones != null)
         {
-            for (int a = 0; a < bones.Length; a++)
+            for (int i = 0; i < bones.Length; i++)
             {
-                GameObject prevBone = (a == 0)
+                bones[i] = baseTail;
+
+                bones[i] = Instantiate(bones[i]);
+
+                GameObject prevBone = (i == 0)
                     ? this.gameObject
-                    : bones[a - 1];
-                GameObject bone = bones[a];
+                    : bones[i - 1];
+                GameObject bone = bones[i];
 
                 Vector3 offset = bone.transform.position
                     - prevBone.transform.position;
