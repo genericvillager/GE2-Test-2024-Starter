@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SpineAnimator : MonoBehaviour {
     public GameObject[] bones;
+    public GameObject[] tail;
+    public GameObject baseTail;
 
     public float bondDamping = 25;
     public float angularBondDamping = 25;
@@ -11,28 +14,36 @@ public class SpineAnimator : MonoBehaviour {
     private List<Vector3> offsets = new List<Vector3>();
     
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+        for (int i = 0; i < tail.Length; i++)
+        {
+            tail[i] = baseTail;
+            Instantiate(tail[i]);
+        }
+
         if (bones != null)
         {
-            for (int i = 0; i < bones.Length; i++)
+            for (int a = 0; a < bones.Length; a++)
             {
-                GameObject prevBone = (i == 0)
-                        ? this.gameObject
-                        : bones[i - 1];
-                GameObject bone = bones[i];
+                GameObject prevBone = (a == 0)
+                    ? this.gameObject
+                    : bones[a - 1];
+                GameObject bone = bones[a];
 
                 Vector3 offset = bone.transform.position
                     - prevBone.transform.position;
-                offset = Quaternion.Inverse(prevBone.transform.rotation) 
+                offset = Quaternion.Inverse(prevBone.transform.rotation)
                     * offset;
 
                 offsets.Add(offset);
             }
         }
-	}
+    }
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void FixedUpdate () 
+    {
         for (int i = 0; i < bones.Length; i++)
         {
             GameObject prevBone = (i == 0)
