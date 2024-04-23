@@ -200,7 +200,7 @@ PrefabInstance:
     - target: {fileID: 3164374717487024560, guid: 2393cc0fb51936d439c93f1e16794288,
         type: 3}
       propertyPath: bondDamping
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3164374717487024560, guid: 2393cc0fb51936d439c93f1e16794288,
         type: 3}
@@ -210,7 +210,7 @@ PrefabInstance:
     - target: {fileID: 3164374717487024560, guid: 2393cc0fb51936d439c93f1e16794288,
         type: 3}
       propertyPath: bones.Array.size
-      value: 6
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3164374717487024560, guid: 2393cc0fb51936d439c93f1e16794288,
         type: 3}

@@ -11,7 +11,7 @@ public class SpineAnimator : MonoBehaviour {
     public float bondDamping = 25;
     public float angularBondDamping = 25;
 
-    public float frequency, baseSize, startAngle, multi;
+    public Vector3 frequency, baseSize, startAngle, multi;
 
     private List<Vector3> offsets = new List<Vector3>();
     
@@ -24,17 +24,22 @@ public class SpineAnimator : MonoBehaviour {
             {
                 bones[i] = baseTail;
 
-                //baseSize = bones[i].gameObject;
-
                 GameObject prevBone = (i == 0)
                     ? this.gameObject
                     : bones[i - 1];
                 GameObject bone = bones[i];
 
+                //float startAngle = startAngle - baseSize;
+
+                Vector3 maxSize = baseSize + multi;
+
+                Vector3 minSize = baseSize;
+
                 bones[i] = Instantiate(bones[i]);
 
                 Vector3 offset = bone.transform.position
                     - prevBone.transform.position;
+
                 offset = Quaternion.Inverse(prevBone.transform.rotation)
                     * offset;
 
